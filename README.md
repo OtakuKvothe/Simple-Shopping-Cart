@@ -1,5 +1,5 @@
 ### Simple-Shopping-Cart
-> ##Simple Shopping Cart based on JDK 11
+> ## Simple Shopping Cart based on JDK 11
 > - Add new item to cart
 > - Remove item from cart
 > - View Cart

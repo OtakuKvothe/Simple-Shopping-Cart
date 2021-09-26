@@ -15,8 +15,8 @@ public class Cart {
         if (!items.isEmpty()) {// if cart is not empty
             System.out.println("\n\n ----- Cart Items ----- \n\n");
             for (Item i : items) {
-                System.out.println("Name : " + i.name + ", Price : " + i.price + ", Quantity : " + i.quantity
-                        + ", Total : " + i.total + "\n");
+                System.out.println("Name : " + i.getName() + ", Price : " + i.getPrice() + ", Quantity : "
+                        + i.getQuantity() + ", Total : " + i.getTotal() + "\n");
             }
             return 1;
         }
@@ -30,9 +30,9 @@ public class Cart {
             System.out.println("\n\n ----- ~~ Total Bill ~~ ----- \n\n");
             double total = 0.0;
             for (Item i : items) {
-                System.out.println("Name : " + i.name + ", Price : " + i.price + ", Quantity : " + i.quantity
-                        + ", Total : " + i.total + "\n");
-                total = total + i.total;
+                System.out.println("Name : " + i.getName() + ", Price : " + i.getPrice() + ", Quantity : "
+                        + i.getQuantity() + ", Total : " + i.getTotal() + "\n");
+                total = total + i.getTotal();
             }
             System.out.println("\n****  Total Amount : " + total + "  ****\n");
             return 1;
@@ -52,25 +52,33 @@ public class Cart {
 
     public int updateQuantity(String name, int quantity) {
         // find item by name and update quantity parameter
-        for (Item i : items) {
-            if (i.name.equals(name)) {
-                i.updateQuantity(quantity);
-                System.out.println("\n\n ----- Items Updated Successfully ----- \n\n");
-                return 1;
-            }
+        Item i = findItem(name);
+        if (i != null) {
+            i.updateQuantity(quantity);
+            System.out.println("\n\n ----- Items Updated Successfully ----- \n\n");
+            return 1;
         }
         return -1;
     }
 
     public int removeItem(String name) {
         // find item by name and remove from item list
-        for (Item i : items) {
-            if (i.name.equals(name)) {
-                items.remove(i);
-                System.out.println("\n\n ----- Items Removed Successfully ----- \n\n");
-                return 1;
-            }
+        Item i = findItem(name);
+        if (i != null) {
+            items.remove(i);
+            System.out.println("\n\n ----- Items Removed Successfully ----- \n\n");
+            return 1;
         }
         return -1;
+    }
+
+    public Item findItem(String name) {
+        // to return object reference for required item
+        for (Item i : items) {
+            if (i.getName().equals(name)) {
+                return i;
+            }
+        }
+        return null;
     }
 }
